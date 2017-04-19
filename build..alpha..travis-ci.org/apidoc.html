@@ -1,0 +1,132 @@
+<div class="apidocDiv">
+<style>
+/*csslint
+*/
+.apidocDiv {
+    background: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.apidocDiv a[href] {
+    color: #33f;
+    font-weight: bold;
+    text-decoration: none;
+}
+.apidocDiv a[href]:hover {
+    text-decoration: underline;
+}
+.apidocCodeCommentSpan {
+    background: #bbf;
+    color: #000;
+    display: block;
+}
+.apidocCodeKeywordSpan {
+    color: #d00;
+    font-weight: bold;
+}
+.apidocCodePre {
+    background: #eef;
+    border: 1px solid;
+    color: #777;
+    padding: 5px;
+    white-space: pre-wrap;
+}
+.apidocFooterDiv {
+    margin-top: 20px;
+    text-align: center;
+}
+.apidocModuleLi {
+    margin-top: 10px;
+}
+.apidocSectionDiv {
+    border-top: 1px solid;
+    margin-top: 20px;
+}
+.apidocSignatureSpan {
+    color: #777;
+    font-weight: bold;
+}
+</style>
+<h1>api documentation for
+    <a
+
+        href="https://github.com/T-PWK/flake-idgen"
+
+    >flake-idgen (v1.1.0)</a>
+</h1>
+<h4>Flake ID generator yields k-ordered, conflict-free ids in a distributed environment</h4>
+<div class="apidocSectionDiv"><a
+    href="#apidoc.tableOfContents"
+    id="apidoc.tableOfContents"
+><h1>table of contents</h1></a><ol>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.flake-idgen">module flake-idgen</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.flake-idgen.flake-idgen">
+            function <span class="apidocSignatureSpan"></span>flake-idgen
+            <span class="apidocSignatureSpan">(options)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">number <span class="apidocSignatureSpan">flake-idgen.</span>POW10</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">number <span class="apidocSignatureSpan">flake-idgen.</span>POW26</span>
+
+        </li>
+
+    </ol></li>
+
+</ol></div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.flake-idgen" id="apidoc.module.flake-idgen">module flake-idgen</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.flake-idgen.flake-idgen" id="apidoc.element.flake-idgen.flake-idgen">
+        function <span class="apidocSignatureSpan"></span>flake-idgen
+        <span class="apidocSignatureSpan">(options)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">flake-idgen = function (options) {
+    this.options = options || {};
+
+    // Set generator id from &#x27;id&#x27; option or combination of &#x27;datacenter&#x27; and &#x27;worker&#x27;
+    if (typeof this.options.id !== &#x27;undefined&#x27;) {
+<span class="apidocCodeCommentSpan">        /*jslint bitwise: true */
+</span>        this.id = this.options.id &#x26; 0x3FF;
+    } else {
+        this.id = ((this.options.datacenter || 0) &#x26; 0x1F) &#x3c;&#x3c; 5 | ((this.options.worker || 0) &#x26; 0x1F);
+    }
+    this.id &#x3c;&#x3c;= 12;  // id generator identifier - will not change while generating ids
+    this.epoch = +this.options.epoch || 0;
+    this.seq = 0;
+    this.lastTime = 0;
+    this.overflow = false;
+    this.seqMask = this.options.seqMask || 0xFFF;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+
+
+
+</div>
+
+<div class="apidocFooterDiv">
+    [ this document was created with
+    <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a>
+    ]
+</div>
+</div>
